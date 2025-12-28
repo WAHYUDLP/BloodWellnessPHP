@@ -6,7 +6,7 @@
 
 Aplikasi berbasis web untuk manajemen profil, perhitungan kalkulator kesehatan, dan pengelolaan resep. Proyek ini dibangun menggunakan **PHP Native** untuk mendemonstrasikan pemahaman dasar pemrograman web, manajemen session, dan interaksi database relasional tanpa framework.
 
-> **📌 Informasi Penting:** > Repository ini adalah versi **PHP Native**. Jika Anda ingin melihat versi yang lebih modern dan terstruktur menggunakan framework, silakan kunjungi: **[Link Repo Laravel Anda di Sini]**
+> **📌 Informasi Penting:** > Repository ini adalah versi **PHP Native**. Jika Anda ingin melihat versi yang lebih modern dan terstruktur menggunakan framework, silakan kunjungi: https://github.com/WAHYUDLP/BloodWellness
 
 ---
 
