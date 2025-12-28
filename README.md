@@ -6,36 +6,53 @@
 
 Aplikasi berbasis web untuk manajemen profil, perhitungan kalkulator kesehatan, dan pengelolaan resep. Proyek ini dibangun menggunakan **PHP Native** untuk mendemonstrasikan pemahaman dasar pemrograman web, manajemen session, dan interaksi database relasional tanpa framework.
 
-> **📌 Informasi Penting:** > Repository ini adalah versi **PHP Native**. Jika Anda ingin melihat versi yang lebih modern dan terstruktur menggunakan framework, silakan kunjungi: https://github.com/WAHYUDLP/BloodWellness
+> **📌 Informasi Penting:**
+> Repository ini adalah versi **PHP Native**. Jika Anda ingin melihat versi yang lebih modern dan terstruktur menggunakan framework, silakan kunjungi: **[BloodWellness (Laravel Version)](https://github.com/WAHYUDLP/BloodWellness)**
 
 ---
 
 ## 🚀 Fitur Utama
 
-* **Autentikasi User:** Sistem login, register, lupa password, dan verifikasi OTP (melalui `processVerifikasiOTP.php`).
-* **Kalkulator Kesehatan:** Fitur khusus untuk melakukan kalkulasi data kesehatan (melalui `kalkulator.php`).
+* **Autentikasi User:** Sistem login, register, lupa password, dan verifikasi OTP.
+* **Kalkulator Kesehatan:** Fitur kalkulasi BMR dan kebutuhan kalori harian yang akurat.
 * **Manajemen Resep:** Fitur pencatatan dan pengelolaan resep makanan (`recipe.php`).
 * **Perencana Menu:** Fitur untuk merencanakan menu harian user (`pagePlanner.php`).
 * **Manajemen Akun:** Edit profil dan penghapusan akun secara aman.
-* **Docker Ready:** Sudah dilengkapi dengan `Dockerfile` dan `docker-compose.yml` untuk deployment yang mudah.
+* **Docker Ready:** Sudah dilengkapi dengan `Dockerfile` dan `docker-compose.yml`.
+
+---
+
+## 🧠 Metodologi Perhitungan (Kalkulator Kesehatan)
+
+Aplikasi ini menggunakan algoritma perhitungan standar medis untuk menentukan *Basal Metabolic Rate* (BMR) user:
+
+### 1. Katch-McArdle Formula
+Digunakan apabila data **persentase lemak tubuh** diketahui. Rumus ini lebih akurat karena didasarkan pada massa tubuh tanpa lemak (*Lean Body Mass*).
+$$LBM = Berat \times (1 - \% Lemak\ Tubuh)$$
+$$BMR = 370 + (21.6 \times LBM)$$
+
+### 2. Mifflin-St Jeor Formula
+Digunakan apabila **lemak tubuh tidak diketahui**. Rumus ini merupakan standar industri saat ini untuk estimasi BMR berdasarkan parameter fisik umum:
+* **Pria:** $BMR = 10 \times berat\ (kg) + 6.25 \times tinggi\ (cm) - 5 \times usia\ (tahun) + 5$
+* **Wanita:** $BMR = 10 \times berat\ (kg) + 6.25 \times tinggi\ (cm) - 5 \times usia\ (tahun) - 161$
 
 ---
 
 ## 🛠️ Stack Teknologi
 
 * **Backend:** PHP (Native)
-* **Frontend:** HTML, CSS (terdapat folder `/css`), Vanilla JavaScript
+* **Frontend:** HTML, CSS (Tailwind CSS style), Vanilla JavaScript
 * **Database:** MySQL (`db.php` untuk koneksi)
-* **Tools:** Composer (Dependency Manager), Docker (Containerization)
+* **Tools:** Composer, Docker (Containerization)
 
 ---
 
 ## 📂 Struktur Folder Penting
 
 * `/dataset`: Penyimpanan data pendukung aplikasi.
-* `/images` & `/uploads`: Penyimpanan aset statis dan file yang diunggah user.
-* `/vendor`: Library pihak ketiga yang dikelola via Composer.
-* `process...php`: File logic untuk menangani pengiriman form (Backend logic).
+* `/images` & `/uploads`: Penyimpanan aset statis dan file user.
+* `/vendor`: Library pihak ketiga via Composer.
+* `process...php`: Backend logic untuk handling form.
 
 ---
 
@@ -50,21 +67,21 @@ Aplikasi berbasis web untuk manajemen profil, perhitungan kalkulator kesehatan, 
     composer install
     ```
 3.  **Konfigurasi Database:**
-    * Impor file database (jika ada) ke MySQL.
-    * Sesuaikan kredensial database di file `db.php`.
-4.  **Menjalankan via Docker (Opsional):**
+    * Impor file database ke MySQL.
+    * Sesuaikan kredensial di file `db.php`.
+4.  **Menjalankan via Docker:**
     ```bash
     docker-compose up -d
     ```
 
 ---
 
-## 💡 Metodologi Pengembangan
+## 💡 Konsep Pengembangan
 
-Aplikasi ini mengikuti pola pengembangan **Procedural-Functional PHP**. Fokus utama dari proyek ini adalah:
+Aplikasi ini menerapkan pola **Procedural-Functional PHP** dengan fokus pada:
 1.  **Security:** Implementasi hashing password dan verifikasi OTP.
-2.  **Session Management:** Memastikan keamanan data user antar halaman.
-3.  **CRUD Operations:** Interaksi langsung dengan MySQL menggunakan ekstensi `mysqli` atau `PDO`.
+2.  **Session Management:** Pengamanan akses halaman berbasis role/status login.
+3.  **Data Integrity:** Validasi input pada sisi server untuk perhitungan kalkulator yang akurat.
 
 ---
 
